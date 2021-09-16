@@ -58,15 +58,13 @@ public class CustomAuthenticationFilter extends UsernamePasswordAuthenticationFi
                 .withClaim("roles", user.getAuthorities().stream().map(GrantedAuthority::getAuthority).collect(Collectors.toList()))
                 .sign(algorithm);
 
-        response.setHeader("access-token", access_token);
-        response.setHeader("referesh_token", referesh_token);
+//        response.setHeader("access-token", access_token);
+//        response.setHeader("referesh_token", referesh_token);
 
         Map<String, String> tokens = new HashMap<>();
         tokens.put("access-token", access_token);
         tokens.put("referesh_token", referesh_token);
-
         response.setContentType(APPLICATION_JSON_VALUE);
-
         new ObjectMapper().writeValue(response.getOutputStream(), tokens);
 
     }
